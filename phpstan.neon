@@ -1,0 +1,8 @@
+parameters:
+  level: 9
+  paths:
+   - src
+  ignoreErrors:
+    - identifier: trait.unused
+    - identifier: argument.named
+    - identifier: missingType.iterableValue
