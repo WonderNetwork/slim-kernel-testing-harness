@@ -1,15 +1,15 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WonderNetwork\SlimKernelTestingHarness\KernelHttpClient;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
-use Slim\Psr7\Factory as Psr7;
 use Slim\Http\Factory as Slim;
+use Slim\Psr7\Factory as Psr7;
 
 final class RequestBuilder {
-
     public static function of(string $method, string $uri): self {
         $factory = self::createDecoratedServerRequestFactory();
         $request = $factory->createServerRequest($method, $uri);
@@ -22,10 +22,15 @@ final class RequestBuilder {
 
     public static function ofRequest(ServerRequestInterface $request): self {
         $factory = self::createDecoratedServerRequestFactory();
+
         return new self(
             request: $request,
             requestFactory: $factory,
         );
+    }
+
+    private static function createDecoratedServerRequestFactory(): Slim\DecoratedServerRequestFactory {
+        return new Slim\DecoratedServerRequestFactory(new Psr7\ServerRequestFactory());
     }
 
     public function __construct(
@@ -36,11 +41,13 @@ final class RequestBuilder {
 
     public function withParsedBody(array $body): self {
         $this->request = $this->request->withParsedBody($body);
+
         return $this;
     }
 
     public function withQueryParams(array $query): self {
         $this->request = $this->request->withQueryParams($query);
+
         return $this;
     }
 
@@ -54,6 +61,7 @@ final class RequestBuilder {
 
     public function withUploadedFiles(UploadedFileInterface ...$files): self {
         $this->request = $this->request->withUploadedFiles($files);
+
         return $this;
     }
 
@@ -84,9 +92,5 @@ final class RequestBuilder {
 
     public function build(): ServerRequestInterface {
         return $this->request;
-    }
-
-    private static function createDecoratedServerRequestFactory(): Slim\DecoratedServerRequestFactory {
-        return new Slim\DecoratedServerRequestFactory(new Psr7\ServerRequestFactory());
     }
 }

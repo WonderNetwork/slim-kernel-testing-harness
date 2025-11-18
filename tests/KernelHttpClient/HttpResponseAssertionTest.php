@@ -10,7 +10,7 @@ use RuntimeException;
 use Slim\Exception\HttpNotFoundException;
 use WonderNetwork\SlimKernelTestingHarness\TestKernel;
 
-class HttpResponseAssertionTest extends TestCase {
+final class HttpResponseAssertionTest extends TestCase {
     public function testNotFound(): void {
         $sut = SlimKernelHttpClient::create(TestKernel::build());
         $sut

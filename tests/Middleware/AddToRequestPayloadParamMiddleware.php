@@ -15,6 +15,7 @@ final readonly class AddToRequestPayloadParamMiddleware implements MiddlewareInt
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface {
         $previousBody = $request->getParsedBody();
+
         return $handler->handle(
             $request
                 ->withParsedBody(

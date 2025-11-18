@@ -41,6 +41,7 @@ final readonly class HttpResponseAssertion {
             minimum: StatusCodeInterface::STATUS_BAD_REQUEST,
             actual: $this->response->getStatusCode(),
         );
+
         return $this;
     }
 
@@ -87,6 +88,7 @@ final readonly class HttpResponseAssertion {
             expected: $this->response->getStatusCode(),
             actual: StatusCodeInterface::STATUS_BAD_REQUEST,
         );
+
         return $this;
     }
 
@@ -95,6 +97,7 @@ final readonly class HttpResponseAssertion {
             expected: $this->response->getStatusCode(),
             actual: StatusCodeInterface::STATUS_FORBIDDEN,
         );
+
         return $this;
     }
 
@@ -103,6 +106,7 @@ final readonly class HttpResponseAssertion {
             expected: $this->response->getStatusCode(),
             actual: StatusCodeInterface::STATUS_TOO_MANY_REQUESTS,
         );
+
         return $this;
     }
 

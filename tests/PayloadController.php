@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 final readonly class PayloadController {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
         $response->getBody()->write(json_encode($request->getParsedBody()));
+
         return $response;
     }
 }

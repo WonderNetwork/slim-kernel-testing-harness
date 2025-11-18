@@ -14,6 +14,7 @@ trait JsonListResponseAssertion {
     public static function ofJsonResponse(HttpResponseAssertion $response, string $path = null): static {
         $data = $response->expectJson();
         $items = $data;
+
         if ($path) {
             Assert::assertArrayHasKey($path, $items, "No items found under $path key.");
             $items = $items[$path];

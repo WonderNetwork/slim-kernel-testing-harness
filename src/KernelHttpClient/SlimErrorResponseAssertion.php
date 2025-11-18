@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WonderNetwork\SlimKernelTestingHarness\KernelHttpClient;
@@ -23,16 +24,19 @@ final class SlimErrorResponseAssertion {
 
     public function assertException(string $class): self {
         Assert::assertSame($class, $this->type);
+
         return $this;
     }
 
     public function assertMessage(string $message): self {
         Assert::assertSame($message, $this->message);
+
         return $this;
     }
 
     public function assertCode(int $code): self {
         Assert::assertSame($code, $this->code);
+
         return $this;
     }
 }

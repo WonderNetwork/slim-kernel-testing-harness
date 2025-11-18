@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WonderNetwork\SlimKernelTestingHarness\KernelHttpClient;
@@ -20,6 +21,7 @@ final class SlimErrorResponseParser extends Exception {
 
         if ($response->response->getHeaderLine('Content-Type') === 'application/json') {
             $message = ArrayAccessor::of($response->expectJson())->maybeString('message');
+
             return $message
                 ? SlimErrorResponseAssertion::ofMessage($message, $code)
                 : SlimErrorResponseAssertion::ofUnknown($code);
