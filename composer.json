@@ -8,7 +8,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^12.4",
-        "phpstan/phpstan": "^2.1"
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.89"
     },
     "license": "MIT",
     "autoload": {
@@ -18,7 +19,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "WonderNetwork\\SlimKernelTestingHarness\\": "tests/",
+            "WonderNetwork\\SlimKernelTestingHarness\\": "./tests",
             "Acme\\Example\\": "examples/"
         }
     },

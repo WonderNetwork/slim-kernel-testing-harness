@@ -28,8 +28,7 @@ final class SlimKernelHttpClientMiddlewaresTest extends TestCase {
         };
 
         $app = TestKernel::build();
-        $sut = SlimKernelHttpClient
-            ::create($app)
+        $sut = SlimKernelHttpClient::create($app)
             ->withMiddleware($middleware);
 
         $actual = $sut->get('/server-params')->expectJson();

@@ -35,6 +35,7 @@ final readonly class ListSearchAssertion {
 
     public function getFirstItemData(): mixed {
         Assert::assertNotCount(0, $this->data, message: "Cannot get first item of empty list.");
+
         return $this->data[array_key_first($this->data)];
     }
 
@@ -44,6 +45,7 @@ final readonly class ListSearchAssertion {
 
     public function getLastItemData(): mixed {
         Assert::assertNotCount(0, $this->data, message: "Cannot get last item of empty list.");
+
         return $this->data[array_key_last($this->data)];
     }
 

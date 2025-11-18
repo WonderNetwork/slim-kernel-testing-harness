@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 final readonly class MethodController {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
         $response->getBody()->write($request->getMethod());
+
         return $response;
     }
 }
