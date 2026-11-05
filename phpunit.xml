@@ -7,6 +7,7 @@
          beStrictAboutOutputDuringTests="true"
          displayDetailsOnPhpunitDeprecations="true"
          failOnPhpunitDeprecation="true"
+         displayDetailsOnAllIssues="true"
          failOnRisky="true"
          failOnWarning="true">
     <testsuites>

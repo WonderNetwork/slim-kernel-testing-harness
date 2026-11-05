@@ -36,7 +36,10 @@ final readonly class ListSearchAssertion {
     public function getFirstItemData(): mixed {
         Assert::assertNotCount(0, $this->data, message: "Cannot get first item of empty list.");
 
-        return $this->data[array_key_first($this->data)];
+        $arrayKeyFirst = array_key_first($this->data);
+        Assert::assertTrue(is_int($arrayKeyFirst) || is_string($arrayKeyFirst));
+
+        return $this->data[$arrayKeyFirst];
     }
 
     public function getFirstItemDataAccessor(): ArrayAccessor {
@@ -46,7 +49,10 @@ final readonly class ListSearchAssertion {
     public function getLastItemData(): mixed {
         Assert::assertNotCount(0, $this->data, message: "Cannot get last item of empty list.");
 
-        return $this->data[array_key_last($this->data)];
+        $arrayKeyLast = array_key_last($this->data);
+        Assert::assertTrue(is_int($arrayKeyLast) || is_string($arrayKeyLast));
+
+        return $this->data[$arrayKeyLast];
     }
 
     public function getLastItemDataAccessor(): ArrayAccessor {
