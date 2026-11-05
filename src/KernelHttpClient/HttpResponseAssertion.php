@@ -59,7 +59,7 @@ final readonly class HttpResponseAssertion {
         return (string) $this->response->getBody();
     }
 
-    public function assertRedirect(string $to = null): self {
+    public function assertRedirect(?string $to = null): self {
         Assert::assertContains(
             needle: $this->response->getStatusCode(),
             haystack: [
