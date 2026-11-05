@@ -10,49 +10,37 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\App;
 
-final readonly class ChainMiddleware implements MiddlewareInterface, RequestHandlerInterface {
+final readonly class ChainMiddleware implements RequestHandlerInterface {
     /**
      * @param App<null> $app
      */
     public static function empty(App $app): self {
-        return new self(middleware: new IdentityMiddleware(), handler: $app);
+        return new self($app);
     }
 
-    public function __construct(
-        private MiddlewareInterface $middleware,
+    /**
+     * @param list<MiddlewareInterface> $middlewares
+     */
+    private function __construct(
         private RequestHandlerInterface $handler,
+        private array $middlewares = [],
     ) {
     }
 
     public function wrap(MiddlewareInterface $middleware): self {
-        $previousHandler = $this->handler;
-
-        if ($previousHandler instanceof self) {
-            return new self(
-                middleware: $this->middleware,
-                handler: $previousHandler->wrap($middleware),
-            );
-        }
-
-        if ($this->middleware instanceof IdentityMiddleware) {
-            // we can drop identity
-            return new self(
-                middleware: $middleware,
-                handler: $this->handler,
-            );
-        }
-
         return new self(
-            middleware: $this->middleware,
-            handler: new self($middleware, $this->handler),
+            handler: $this->handler,
+            middlewares: [$middleware, ...$this->middlewares],
         );
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface {
-        return $this->process($request, $this->handler);
-    }
+        $handler = array_reduce(
+            $this->middlewares,
+            MiddlewareDelegator::wrapMiddleware(...),
+            $this->handler,
+        );
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface {
-        return $this->middleware->process($request, $handler);
+        return $handler->handle($request);
     }
 }
