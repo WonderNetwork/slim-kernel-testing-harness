@@ -11,7 +11,7 @@ use WonderNetwork\SlimKernelTestingHarness\KernelHttpClient\HttpResponseAssertio
  * Represents a HttpResponse of a list endpoint
  */
 trait JsonListResponseAssertion {
-    public static function ofJsonResponse(HttpResponseAssertion $response, string $path = null): static {
+    public static function ofJsonResponse(HttpResponseAssertion $response, ?string $path = null): static {
         $data = $response->expectJson();
         $items = $data;
 
