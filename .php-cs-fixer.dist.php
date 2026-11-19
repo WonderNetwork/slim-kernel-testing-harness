@@ -123,7 +123,7 @@ $rules = [
     'native_function_casing' => true,
     'native_type_declaration_casing' => true,
     'new_expression_parentheses' => [
-        'use_parentheses' => true,
+        'use_parentheses' => false,
     ],
     'new_with_parentheses' => [
         'anonymous_class' => true,
