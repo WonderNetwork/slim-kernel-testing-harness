@@ -8,13 +8,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Slim\App;
 
 final readonly class ChainMiddleware implements RequestHandlerInterface {
-    /**
-     * @param App<null> $app
-     */
-    public static function empty(App $app): self {
+    public static function empty(RequestHandlerInterface $app): self {
         return new self($app);
     }
 
